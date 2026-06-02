@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赤石研究室ウェブサイト 運用マニュアル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  :root {
+    --green-dark: #2c6e3f;
+    --green-mid: #3a9a5c;
+    --green-light: #e8f5ee;
+    --navy: #1a3a5c;
+    --text: #333;
+    --text-light: #666;
+    --border: #dde8e2;
+    --bg-alt: #f7faf8;
+    --accent: #e07b39;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--text);
+    line-height: 1.85;
+    background: #fff;
+  }
+
+  /* ===== ヘッダー ===== */
+  .site-header {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.03) 20px,
+      rgba(255,255,255,0.03) 40px
+    );
+  }
+  .site-header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    position: relative;
+  }
+  .site-header .subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 0.5rem;
+    position: relative;
+  }
+  .header-badges {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* ===== レイアウト ===== */
+  .layout {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  /* ===== サイドナビ ===== */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+  }
+  .sidebar-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 1.2rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
+  .nav-section {
+    margin-bottom: 0.3rem;
+  }
+  .nav-section-label {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    font-weight: 700;
+    padding: 0.8rem 1.2rem 0.3rem;
+    letter-spacing: 0.05em;
+  }
+  .sidebar a {
+    display: block;
+    padding: 0.45rem 1.2rem 0.45rem 1.6rem;
+    font-size: 0.84rem;
+    color: var(--text);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .sidebar a:hover {
+    background: var(--green-light);
+    border-left-color: var(--green-mid);
+    color: var(--green-dark);
+  }
+  .sidebar a.active {
+    background: var(--green-light);
+    border-left-color: var(--green-dark);
+    color: var(--green-dark);
+    font-weight: 700;
+  }
+
+  /* ===== メインコンテンツ ===== */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem;
+  }
+
+  /* ===== セクション ===== */
+  .section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 1rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid var(--green-dark);
+  }
+  .section-number {
+    background: var(--green-dark);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .section-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 2rem 0 0.8rem;
+    padding-left: 0.8rem;
+    border-left: 4px solid var(--green-mid);
+  }
+
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-size: 0.93rem;
+  }
+
+  /* ===== 情報ボックス ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  .box-info {
+    background: #e8f4fd;
+    border-left: 4px solid #2196f3;
+  }
+  .box-tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green-mid);
+  }
+  .box-warn {
+    background: #fff8e6;
+    border-left: 4px solid #f5a623;
+  }
+  .box-danger {
+    background: #fdecea;
+    border-left: 4px solid #e53935;
+  }
+  .box strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== コード ===== */
+  code {
+    background: #f0f0f0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 0.83em;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    color: #c7254e;
+  }
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1.3rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.2rem 0;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    position: relative;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+  .code-label {
+    background: var(--green-mid);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px 4px 0 0;
+    display: inline-block;
+    margin-bottom: -1px;
+    margin-top: 1rem;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  /* ===== テーブル ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1.2rem 0;
+  }
+  th {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background: var(--bg-alt);
+  }
+  tr:hover td {
+    background: var(--green-light);
+  }
+
+  /* ===== ファイルツリー ===== */
+  .file-tree {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 8px;
+    padding: 1.3rem 1.5rem;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.9;
+    margin: 1.2rem 0;
+  }
+  .ft-dir { color: #89dceb; font-weight: 700; }
+  .ft-qmd { color: #a6e3a1; }
+  .ft-r   { color: #f38ba8; }
+  .ft-csv { color: #fab387; }
+  .ft-css { color: #cba6f7; }
+  .ft-img { color: #f9e2af; }
+  .ft-yml { color: #89b4fa; }
+  .ft-comment { color: #6c7086; font-style: italic; }
+
+  /* ===== バッジ ===== */
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .badge-green { background: #dff0e8; color: #1a6e3f; }
+  .badge-blue  { background: #dbeafe; color: #1e40af; }
+  .badge-orange{ background: #fef3c7; color: #92400e; }
+  .badge-red   { background: #fee2e2; color: #991b1b; }
+
+  /* ===== ステップ ===== */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 1.2rem 0;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.92rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--green-dark);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* ===== CSS解説テーブル ===== */
+  .css-table td:first-child {
+    font-family: monospace;
+    color: #c7254e;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    width: 35%;
+  }
+
+  /* ===== TOC上部まとめ ===== */
+  .toc-card {
+    background: var(--green-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc-card h3 {
+    border: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    color: var(--green-dark);
+    font-size: 1rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+  }
+  .toc-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.87rem;
+    color: var(--green-dark);
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .toc-item:hover { background: rgba(44,110,63,0.1); }
+
+  /* ===== フッター ===== */
+  .site-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    margin-top: 4rem;
+  }
+
+  /* ===== 印刷 ===== */
+  @media print {
+    .sidebar { display: none; }
+    .main { padding: 1rem; }
+    pre { background: #f5f5f5; color: #333; }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>🌿 赤石研究室ウェブサイト<br>運用マニュアル</h1>
+  <p class="subtitle">Akaishi Lab — 大阪産業大学 建築・環境デザイン学部</p>
+  <div class="header-badges">
+    <span class="header-badge">Quarto Website</span>
+    <span class="header-badge">GitHub Pages</span>
+    <span class="header-badge">R / RStudio</span>
+    <span class="header-badge">初版：2026年6月</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- サイドナビ -->
+  <nav class="sidebar">
+    <div class="sidebar-title">目次</div>
+    <div class="nav-section">
+      <div class="nav-section-label">基礎知識</div>
+      <a href="#sec1">1. このサイトについて</a>
+      <a href="#sec2">2. Quartoとは</a>
+      <a href="#sec3">3. ファイル構成</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">公開・ビルド</div>
+      <a href="#sec4">4. GitHub Pagesへの公開</a>
+      <a href="#sec5">5. ビルド手順</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">ページ別編集</div>
+      <a href="#sec6">6. ニュースの更新</a>
+      <a href="#sec7">7. メンバーの更新</a>
+      <a href="#sec8">8. 論文・業績の更新</a>
+      <a href="#sec9">9. ギャラリーの更新</a>
+      <a href="#sec10">10. 研究内容の編集</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">デザイン</div>
+      <a href="#sec11">11. CSSデザインの解説</a>
+      <a href="#sec12">12. ナビ・フッターの変更</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">運用・保守</div>
+      <a href="#sec13">13. 日常的な管理</a>
+      <a href="#sec14">14. トラブルシューティング</a>
+      <a href="#sec15">15. 引き継ぎチェックリスト</a>
+    </div>
+  </nav>
+
+  <!-- メイン -->
+  <main class="main">
+
+    <div class="toc-card">
+      <h3>📋 このマニュアルについて</h3>
+      <p style="font-size:0.9rem; color:var(--text-light); margin-bottom:1rem;">
+        赤石研究室のウェブサイトを管理・運営するための実践的な手引きです。Rや Quartoの経験が浅い学生管理者でも、日常的な更新作業を行えることを目標にしています。
+      </p>
+      <div class="toc-grid">
+        <a class="toc-item" href="#sec1">📌 サイトの概要</a>
+        <a class="toc-item" href="#sec3">📁 ファイル構成</a>
+        <a class="toc-item" href="#sec4">🚀 GitHub公開手順</a>
+        <a class="toc-item" href="#sec6">📰 ニュース更新</a>
+        <a class="toc-item" href="#sec7">👥 メンバー更新</a>
+        <a class="toc-item" href="#sec8">📄 論文・業績更新</a>
+        <a class="toc-item" href="#sec9">📷 ギャラリー更新</a>
+        <a class="toc-item" href="#sec11">🎨 CSSデザイン解説</a>
+        <a class="toc-item" href="#sec14">🔧 トラブル対処</a>
+        <a class="toc-item" href="#sec15">✅ 引き継ぎリスト</a>
+      </div>
+    </div>
+
+    <!-- ===== Section 1 ===== -->
+    <section class="section" id="sec1">
+      <div class="section-header">
+        <span class="section-number">1</span>
+        <span class="section-icon">🌿</span>
+        <h2 class="section-title">このウェブサイトについて</h2>
+      </div>
+
+      <h3>サイトの概要</h3>
+      <p>このウェブサイトは、<strong>大阪産業大学 建築・環境デザイン学部 自然デザインコース の赤石研究室（赤石大輔 准教授）</strong>の公式サイトです。</p>
+
+      <table>
+        <tr><th>項目</th><th>内容</th></tr>
+        <tr><td>サイト名</td><td>Akaishi Lab</td></tr>
+        <tr><td>説明</td><td>大阪産業大学・建築・環境デザイン学部・赤石研究室</td></tr>
+        <tr><td>テーマ・内容</td><td>生態学・里山保全・生物多様性の研究紹介、メンバー紹介、論文・業績、ニュース、ギャラリー</td></tr>
+        <tr><td>公開先</td><td>GitHub Pages（DaisukeOSU アカウント）</td></tr>
+        <tr><td>Googleアナリティクス</td><td>G-7RP9QNY80F（アクセス解析を設定済み）</td></tr>
+        <tr><td>お問い合わせ</td><td>Googleフォーム（https://forms.gle/Ls7SbsprrEmax6Pi7）</td></tr>
+      </table>
+
+      <h3>ページ構成</h3>
+      <table>
+        <tr><th>ページ</th><th>ファイル名</th><th>内容</th></tr>
+        <tr><td>ホーム</td><td><code>index.qmd</code></td><td>トップページ。ヒーロー画像・教員紹介・最新ニュース・研究トピック</td></tr>
+        <tr><td>研究</td><td><code>research.qmd</code></td><td>3つの研究テーマの詳細説明</td></tr>
+        <tr><td>論文・業績</td><td><code>publications.qmd</code></td><td>researchmapリンク・書籍・論文一覧</td></tr>
+        <tr><td>メンバー</td><td><code>members.qmd</code></td><td>教員情報・学生一覧・卒業生一覧</td></tr>
+        <tr><td>ニュース</td><td><code>news.qmd</code></td><td>研究室の最新ニュース一覧</td></tr>
+        <tr><td>ギャラリー</td><td><code>gallery.qmd</code></td><td>写真ギャラリー（年・月別）</td></tr>
+      </table>
+
+      <div class="box box-info">
+        <strong>💡 サイトのコンセプト</strong>
+        グリーン系のカラーパレット（自然・里山をイメージ）と「Zen Maru Gothic」フォントを使用し、研究内容の雰囲気に合った温かみのあるデザインになっています。
+      </div>
+    </section>
+
+    <!-- ===== Section 2 ===== -->
+    <section class="section" id="sec2">
+      <div class="section-header">
+        <span class="section-number">2</span>
+        <span class="section-icon">🔧</span>
+        <h2 class="section-title">Quartoで構築したこと</h2>
+      </div>
+
+      <h3>Quartoとは</h3>
+      <p><strong>Quarto</strong>（クワルト）は、Rや Python のコードを含むドキュメントをWebサイト、PDF、プレゼンテーションなど様々な形式に変換できるオープンソースのパブリッシングシステムです。このサイトはRStudio上でQuartoを使って構築されています。</p>
+
+      <table>
+        <tr><th>仕組み</th><th>説明</th></tr>
+        <tr><td><code>.qmd</code>ファイル</td><td>Markdown + Rコードを書いたテキストファイル。これがページの素材</td></tr>
+        <tr><td>Rコードチャンク</td><td><code>```{r}</code>で囲まれたRコードが自動実行され、表・グラフが生成される</td></tr>
+        <tr><td><code>_quarto.yml</code></td><td>サイト全体の設定ファイル（タイトル・ナビ・フッター・テーマなど）</td></tr>
+        <tr><td><code>quarto render</code></td><td>全ページをHTMLに変換するコマンド。出力先は <code>_site/</code>フォルダ</td></tr>
+      </table>
+
+      <h3>必要なソフトウェア</h3>
+      <ol class="steps">
+        <li><strong>R</strong>（4.0以上）— <a href="https://cran.r-project.org/" target="_blank">https://cran.r-project.org/</a> からインストール</li>
+        <li><strong>RStudio</strong>（2026.05系以上推奨）— <a href="https://posit.co/download/rstudio-desktop/" target="_blank">https://posit.co/download/rstudio-desktop/</a></li>
+        <li><strong>Git</strong>（GitHub連携のため）— <a href="https://git-scm.com/" target="_blank">https://git-scm.com/</a></li>
+        <li><strong>必要なRパッケージ</strong>（初回のみコンソールで実行）</li>
+      </ol>
+
+      <div class="code-label">R コンソール</div>
+      <pre><code>install.packages(c("tidyverse", "knitr", "exiftoolr", "magick"))</code></pre>
+
+      <div class="box box-warn">
+        <strong>⚠️ ExifToolRの追加設定</strong>
+        <code>exiftoolr</code>パッケージはギャラリー写真の振り分けに使用します。初回のみ以下も実行してください：<br>
+        <code>exiftoolr::install_exiftool()</code>
+      </div>
+    </section>
+
+    <!-- ===== Section 3 ===== -->
+    <section class="section" id="sec3">
+      <div class="section-header">
+        <span class="section-number">3</span>
+        <span class="section-icon">📁</span>
+        <h2 class="section-title">ファイル構成</h2>
+      </div>
+
+      <p>プロジェクトフォルダ（<code>files.Rproj</code>があるフォルダ）の全体構成は以下の通りです。</p>
+
+      <div class="file-tree">
+        <span class="ft-dir">プロジェクトフォルダ/</span><br>
+        ├── <span class="ft-yml">_quarto.yml</span>　　　　<span class="ft-comment">← サイト全体の設定（★重要）</span><br>
+        ├── <span class="ft-yml">files.Rproj</span>　　　　 <span class="ft-comment">← RStudioプロジェクトファイル</span><br>
+        │<br>
+        ├── <span class="ft-comment">── ページファイル ──</span><br>
+        ├── <span class="ft-qmd">index.qmd</span>　　　　　<span class="ft-comment">← ホームページ</span><br>
+        ├── <span class="ft-qmd">research.qmd</span>　　　 <span class="ft-comment">← 研究ページ</span><br>
+        ├── <span class="ft-qmd">publications.qmd</span>　<span class="ft-comment">← 論文・業績ページ</span><br>
+        ├── <span class="ft-qmd">members.qmd</span>　　　 <span class="ft-comment">← メンバーページ</span><br>
+        ├── <span class="ft-qmd">news.qmd</span>　　　　　<span class="ft-comment">← ニュースページ</span><br>
+        ├── <span class="ft-qmd">gallery.qmd</span>　　　　<span class="ft-comment">← ギャラリーページ</span><br>
+        │<br>
+        ├── <span class="ft-comment">── Rスクリプト ──</span><br>
+        ├── <span class="ft-r">news_table.R</span>　　　 <span class="ft-comment">← ニュース表示の関数（重要）</span><br>
+        ├── <span class="ft-r">gallary.R</span>　　　　　<span class="ft-comment">← 写真の圧縮・振り分けスクリプト</span><br>
+        ├── <span class="ft-r">TEST.R</span>　　　　　　 <span class="ft-comment">← テスト用（管理者が使用）</span><br>
+        │<br>
+        ├── <span class="ft-comment">── データファイル（CSV）──</span><br>
+        ├── <span class="ft-csv">news.csv</span>　　　　　 <span class="ft-comment">← ニュース一覧（★よく更新する）</span><br>
+        ├── <span class="ft-csv">members.csv</span>　　　 <span class="ft-comment">← 学生メンバー一覧（★よく更新する）</span><br>
+        ├── <span class="ft-csv">OB.csv</span>　　　　　　<span class="ft-comment">← 卒業生・OB一覧</span><br>
+        ├── <span class="ft-csv">rm_published_papers20260531.csv</span>　<span class="ft-comment">← researchmapからエクスポートした論文データ</span><br>
+        │<br>
+        ├── <span class="ft-comment">── デザイン・画像 ──</span><br>
+        ├── <span class="ft-css">styles.css</span>　　　　 <span class="ft-comment">← サイト全体のデザイン設定</span><br>
+        ├── <span class="ft-img">hero2.jpg</span>　　　　　<span class="ft-comment">← トップページの背景写真</span><br>
+        ├── <span class="ft-img">photo.jpg</span>　　　　　<span class="ft-comment">← 赤石先生の顔写真</span><br>
+        ├── <span class="ft-img">favicon.png</span>　　　　<span class="ft-comment">← ブラウザタブのアイコン</span><br>
+        │<br>
+        ├── <span class="ft-comment">── フォルダ ──</span><br>
+        ├── <span class="ft-dir">gallery/</span>　　　　　　<span class="ft-comment">← 写真追加時にここに入れる（作業用）</span><br>
+        ├── <span class="ft-dir">photos/</span>　　　　　　 <span class="ft-comment">← 圧縮・振り分け済み写真（年/月/ファイル）</span><br>
+        └── <span class="ft-dir">_site/</span>　　　　　　 <span class="ft-comment">← ビルド後のHTMLが生成される（触らない）</span>
+      </div>
+
+      <h3>各ファイルの更新頻度</h3>
+      <table>
+        <tr><th>ファイル</th><th>更新タイミング</th><th>難易度</th></tr>
+        <tr><td><code>news.csv</code></td><td>論文掲載・受賞・イベントのたびに</td><td><span class="badge badge-green">★☆☆ 簡単</span></td></tr>
+        <tr><td><code>members.csv</code></td><td>年度はじめ・卒業・入学のたびに</td><td><span class="badge badge-green">★☆☆ 簡単</span></td></tr>
+        <tr><td><code>OB.csv</code></td><td>年度末（卒業生が出たとき）</td><td><span class="badge badge-green">★☆☆ 簡単</span></td></tr>
+        <tr><td><code>gallery/</code>への写真追加</td><td>イベント・野外調査の後</td><td><span class="badge badge-blue">★★☆ 普通</span></td></tr>
+        <tr><td><code>rm_published_papers…csv</code></td><td>論文が出たとき（researchmapから再エクスポート）</td><td><span class="badge badge-blue">★★☆ 普通</span></td></tr>
+        <tr><td><code>research.qmd</code></td><td>研究内容が変わったとき</td><td><span class="badge badge-blue">★★☆ 普通</span></td></tr>
+        <tr><td><code>styles.css</code> / <code>_quarto.yml</code></td><td>デザイン変更・ナビ変更時</td><td><span class="badge badge-orange">★★★ 上級</span></td></tr>
+      </table>
+    </section>
+
+    <!-- ===== Section 4 ===== -->
+    <section class="section" id="sec4">
+      <div class="section-header">
+        <span class="section-number">4</span>
+        <span class="section-icon">🚀</span>
+        <h2 class="section-title">GitHub Pagesへの公開</h2>
+      </div>
+
+      <h3>仕組みの概要</h3>
+      <p>このサイトは <strong>GitHub Pages</strong> を使って無料で公開されています。GitHubのリポジトリ（<code>DaisukeOSU</code>アカウント）に <code>_site/</code> フォルダの内容をアップロードすることで、ウェブに公開されます。</p>
+
+      <div class="box box-info">
+        <strong>📌 前提条件</strong>
+        Gitのインストールと、GitHubアカウント（<code>DaisukeOSU</code>）への認証設定が必要です。初回設定については赤石先生に確認してください。
+      </div>
+
+      <h3>公開の基本的な流れ</h3>
+      <ol class="steps">
+        <li>RStudioで編集（CSVやqmdを更新）</li>
+        <li>RStudioのTerminalで <code>quarto render</code> を実行 → <code>_site/</code> が更新される</li>
+        <li><code>_site/</code> フォルダの内容をGitHubにpush</li>
+        <li>数分後にサイトが更新される</li>
+      </ol>
+
+      <h3>Terminal での操作手順</h3>
+      <p>RStudioの下部にある「Terminal」タブを開いて、以下を順番に実行します。</p>
+
+      <div class="code-label">Terminal（毎回の更新作業）</div>
+      <pre><code># 1. 変更内容を確認（どのファイルが変わったか確認できる）
+git status
+
+# 2. 全ての変更をステージング
+git add .
+
+# 3. コミット（"" の中は変更の説明を日本語で書いてOK）
+git commit -m "ニュースを更新"
+
+# 4. GitHubにアップロード（push）
+git push origin main</code></pre>
+
+      <div class="box box-tip">
+        <strong>✅ ショートカット：毎回の更新はこの4行だけ覚えればOK</strong>
+        <code>git add .</code> → <code>git commit -m "説明"</code> → <code>git push origin main</code>
+      </div>
+
+      <h3>GitHub Pagesの設定確認</h3>
+      <p>GitHubリポジトリの Settings → Pages で、以下が設定されていることを確認してください。</p>
+      <table>
+        <tr><th>設定項目</th><th>値</th></tr>
+        <tr><td>Source（ソース）</td><td>Deploy from a branch</td></tr>
+        <tr><td>Branch</td><td><code>main</code> ／ <code>/docs</code> または <code>/(root)</code></td></tr>
+      </table>
+
+      <div class="box box-warn">
+        <strong>⚠️ _quarto.yml の output-dir に注意</strong>
+        現在 <code>output-dir: _site</code> となっています。GitHub Pages の設定が <code>/docs</code> になっている場合は <code>output-dir: docs</code> に変更が必要です。赤石先生に現在の設定を確認してください。
+      </div>
+    </section>
+
+    <!-- ===== Section 5 ===== -->
+    <section class="section" id="sec5">
+      <div class="section-header">
+        <span class="section-number">5</span>
+        <span class="section-icon">⚙️</span>
+        <h2 class="section-title">ビルド手順（render）</h2>
+      </div>
+
+      <h3>方法①：RStudioのボタンから（初心者向け）</h3>
+      <ol class="steps">
+        <li>RStudioで <code>files.Rproj</code> を開いてプロジェクトを起動</li>
+        <li>右上の「Build」タブをクリック</li>
+        <li>「Render Website」ボタンをクリック</li>
+        <li>Viewer ペインにサイトのプレビューが表示される</li>
+      </ol>
+
+      <h3>方法②：Terminalから（推奨）</h3>
+      <div class="code-label">Terminal</div>
+      <pre><code># サイト全体をビルド
+quarto render
+
+# 特定のページだけビルド（高速）
+quarto render news.qmd
+
+# プレビュー（変更を自動検知して更新）
+quarto preview</code></pre>
+
+      <div class="box box-tip">
+        <strong>💡 quarto preview が便利</strong>
+        <code>quarto preview</code> を実行するとブラウザが自動で開き、ファイルを保存するたびにリアルタイムでプレビューが更新されます。編集作業中は常にこれを使うと便利です。
+      </div>
+
+      <h3>ビルド時のエラー例</h3>
+      <table>
+        <tr><th>エラーメッセージ（例）</th><th>原因と対処</th></tr>
+        <tr><td><code>package 'tidyverse' not found</code></td><td>Rパッケージが未インストール。<code>install.packages("tidyverse")</code> を実行</td></tr>
+        <tr><td><code>could not find function "read_csv"</code></td><td><code>library(tidyverse)</code> が不足。スクリプト冒頭に追記</td></tr>
+        <tr><td>CSVが読み込めない</td><td>ファイル名・文字コードの確認（UTF-8推奨）</td></tr>
+        <tr><td>写真が表示されない</td><td>画像ファイルのパスや拡張子を確認</td></tr>
+      </table>
+    </section>
+
+    <!-- ===== Section 6 ===== -->
+    <section class="section" id="sec6">
+      <div class="section-header">
+        <span class="section-number">6</span>
+        <span class="section-icon">📰</span>
+        <h2 class="section-title">ニュースの更新</h2>
+      </div>
+
+      <p>ニュースは <code>news.csv</code> を編集するだけで更新できます。RStudioやExcel・テキストエディタで開いて編集できます。</p>
+
+      <h3>news.csv のフォーマット</h3>
+      <div class="code-label">news.csv の構造</div>
+      <pre><code>date,type,content,url
+2026/05/31,研究,ウェブサイトを立ち上げました。,
+2026/05/30,メディア,読売新聞の取材にコメントしました。,https://www.osaka-sandai.ac.jp/...</code></pre>
+
+      <table>
+        <tr><th>列名</th><th>内容</th><th>使用できる値</th></tr>
+        <tr><td><code>date</code></td><td>日付</td><td><code>2026/06/01</code> の形式</td></tr>
+        <tr><td><code>type</code></td><td>種別バッジ</td><td><code>論文</code>・<code>受賞</code>・<code>研究</code>・<code>募集</code>・<code>メディア</code></td></tr>
+        <tr><td><code>content</code></td><td>ニュース本文</td><td>自由記述。HTMLタグも使用可</td></tr>
+        <tr><td><code>url</code></td><td>リンク先URL（任意）</td><td>URLがあればcontentがリンクになる。なければ空欄</td></tr>
+      </table>
+
+      <div class="box box-tip">
+        <strong>✅ バッジの色について</strong>
+        typeに入れた値によってバッジの色が自動で変わります：<br>
+        🟢 <code>論文</code>（緑）　🟡 <code>受賞</code>（黄）　🔵 <code>研究</code>（青）　🔴 <code>募集</code>（赤）　🟣 <code>メディア</code>（紫）
+      </div>
+
+      <h3>注意事項</h3>
+      <div class="box box-warn">
+        <strong>⚠️ カンマや引用符を含む場合</strong>
+        contentにカンマ（,）や引用符を含む場合は、セル全体をダブルクォートで囲んでください：<br>
+        <code>"日本生命財団、環境問題研究助成に採択されました。"</code><br>
+        内側に引用符が必要な場合は <code>""</code>（二重）にします。
+      </div>
+
+      <p>CSVを保存したら、<code>quarto render</code> で再ビルドして公開します。</p>
+    </section>
+
+    <!-- ===== Section 7 ===== -->
+    <section class="section" id="sec7">
+      <div class="section-header">
+        <span class="section-number">7</span>
+        <span class="section-icon">👥</span>
+        <h2 class="section-title">メンバーの更新</h2>
+      </div>
+
+      <h3>在籍メンバー（members.csv）</h3>
+      <div class="code-label">members.csv の構造</div>
+      <pre><code>name,category,grade,theme
+T.M.,大学院生,M2,大阪府におけるヒナコウモリの生息状況の解明
+M.O.,学部生,4年,耕作放棄地の管理の違いによる植生と昆虫相への影響</code></pre>
+
+      <table>
+        <tr><th>列名</th><th>内容</th><th>入力例</th></tr>
+        <tr><td><code>name</code></td><td>名前（イニシャルでも可）</td><td><code>T.M.</code> または <code>田中太郎</code></td></tr>
+        <tr><td><code>category</code></td><td>学生区分</td><td><code>大学院生</code> または <code>学部生</code></td></tr>
+        <tr><td><code>grade</code></td><td>学年</td><td><code>M2</code>・<code>M1</code>・<code>4年</code>・<code>3年</code></td></tr>
+        <tr><td><code>theme</code></td><td>研究テーマ</td><td>卒業研究・修士研究のテーマ</td></tr>
+      </table>
+
+      <h3>卒業生・OB（OB.csv）</h3>
+      <div class="code-label">OB.csv の構造</div>
+      <pre><code>name,year,affiliation
+K.S.,2025,株式会社グリーンシステム
+T.U.,2025,カメラのキタムラ</code></pre>
+
+      <table>
+        <tr><th>列名</th><th>内容</th></tr>
+        <tr><td><code>name</code></td><td>名前（イニシャル推奨）</td></tr>
+        <tr><td><code>year</code></td><td>卒業年度（西暦4桁）</td></tr>
+        <tr><td><code>affiliation</code></td><td>卒業時の就職先・進学先</td></tr>
+      </table>
+
+      <h3>年度替わりの作業手順</h3>
+      <ol class="steps">
+        <li><code>members.csv</code> を開き、卒業・修了するメンバーの行を削除</li>
+        <li>削除したメンバーの情報を <code>OB.csv</code> に追加（yearは卒業年度）</li>
+        <li>新入生の情報を <code>members.csv</code> に追加</li>
+        <li>在籍メンバーの gradeを更新（M1→M2、3年→4年 など）</li>
+        <li><code>quarto render</code> でビルドして確認・公開</li>
+      </ol>
+    </section>
+
+    <!-- ===== Section 8 ===== -->
+    <section class="section" id="sec8">
+      <div class="section-header">
+        <span class="section-number">8</span>
+        <span class="section-icon">📄</span>
+        <h2 class="section-title">論文・業績の更新</h2>
+      </div>
+
+      <h3>論文一覧の更新手順</h3>
+      <p>論文一覧は <strong>researchmap からエクスポートしたCSVファイル</strong>を使っています。</p>
+
+      <ol class="steps">
+        <li><a href="https://researchmap.jp/" target="_blank">researchmap</a> にログインし、「論文」ページを開く</li>
+        <li>画面右上の「エクスポート」→「CSV形式」を選択してダウンロード</li>
+        <li>ダウンロードしたCSVファイルを、プロジェクトフォルダ内の既存ファイルと置き換える（ファイル名は合わせること）</li>
+        <li><code>publications.qmd</code> 内の読み込みファイル名を確認・更新</li>
+      </ol>
+
+      <div class="code-label">publications.qmd 内の該当箇所</div>
+      <pre><code>papers <- read_csv(
+  "rm_published_papers20260531.csv",  # ← ここのファイル名を更新する
+  skip = 1,
+  col_types = cols(.default = col_character())
+)</code></pre>
+
+      <div class="box box-tip">
+        <strong>💡 ファイル名の日付を更新する</strong>
+        エクスポートするたびにファイル名の日付部分が変わります（例：<code>rm_published_papers20260601.csv</code>）。コード内のファイル名もあわせて変更してください。
+      </div>
+
+      <h3>書籍の追加</h3>
+      <p>書籍は <code>publications.qmd</code> を直接編集します。既存の書籍ブロックをコピーして、URLとタイトル・著者情報を書き換えます。</p>
+
+      <div class="code-label">publications.qmd — 書籍ブロックの例</div>
+      <pre><code>&lt;a href="書籍のURL" target="_blank"
+   style="display:flex; flex-direction:column; align-items:center; gap:8px;
+          padding:1rem 0.75rem; border:1px solid #e0e0e0; border-radius:10px;
+          text-decoration:none; color:inherit;"&gt;
+  📗 &lt;span style="font-size:17px; font-weight:500;"&gt;書籍タイトル&lt;/span&gt;
+  &lt;span style="font-size:17px; color:#888;"&gt;著者名 編&lt;br&gt;出版社 年&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+    </section>
+
+    <!-- ===== Section 9 ===== -->
+    <section class="section" id="sec9">
+      <div class="section-header">
+        <span class="section-number">9</span>
+        <span class="section-icon">📷</span>
+        <h2 class="section-title">ギャラリーの更新</h2>
+      </div>
+
+      <p>ギャラリーは写真を追加するだけで自動的に年月別に整理される仕組みになっています。</p>
+
+      <h3>写真追加の手順</h3>
+      <ol class="steps">
+        <li>追加したい写真（JPG/PNG）を <code>gallery/</code> フォルダにコピーする</li>
+        <li>RStudioで <code>gallary.R</code> を開いて全体を実行（<kbd>Ctrl</kbd>+<kbd>A</kbd> → <kbd>Ctrl</kbd>+<kbd>Enter</kbd>）</li>
+        <li>スクリプトが自動で写真を圧縮し、撮影日時に基づいて <code>photos/年/月/</code> に振り分ける</li>
+        <li><code>quarto render</code> でビルドして確認・公開</li>
+      </ol>
+
+      <h3>gallary.R の動作説明</h3>
+      <table>
+        <tr><th>処理内容</th><th>説明</th></tr>
+        <tr><td>重複チェック</td><td>すでに <code>photos/</code> にあるファイルは処理をスキップ（二重追加の防止）</td></tr>
+        <tr><td>圧縮</td><td>長辺1200pxにリサイズし、品質80%で再保存（容量削減）</td></tr>
+        <tr><td>日付取得</td><td>写真のExifデータから撮影日時を自動取得</td></tr>
+        <tr><td>フォルダ振り分け</td><td><code>photos/2025/10/</code> のように年月フォルダに自動コピー</td></tr>
+      </table>
+
+      <div class="box box-warn">
+        <strong>⚠️ 日付不明の写真はスキップされる</strong>
+        スマホで撮影した写真には通常Exifデータが入っています。スクリーンショットなど日付情報がない場合はスキップされます。その場合は手動で <code>photos/年/月/</code> フォルダに直接コピーしてください。
+      </div>
+
+      <h3>フォルダ構造</h3>
+      <div class="file-tree">
+        <span class="ft-dir">photos/</span><br>
+        ├── <span class="ft-dir">2025/</span><br>
+        │　　├── <span class="ft-dir">10/</span>　　<span class="ft-comment">← 10月の写真</span><br>
+        │　　│　　├── <span class="ft-img">IMG_001.jpg</span><br>
+        │　　│　　└── <span class="ft-img">IMG_002.jpg</span><br>
+        │　　└── <span class="ft-dir">11/</span>　　<span class="ft-comment">← 11月の写真</span><br>
+        └── <span class="ft-dir">2026/</span><br>
+        　　　└── <span class="ft-dir">04/</span>　　<span class="ft-comment">← 2026年4月の写真</span>
+      </div>
+    </section>
+
+    <!-- ===== Section 10 ===== -->
+    <section class="section" id="sec10">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <span class="section-icon">🔬</span>
+        <h2 class="section-title">研究内容・基本情報の編集</h2>
+      </div>
+
+      <h3>研究テーマの編集（research.qmd）</h3>
+      <p>研究テーマの内容は <code>research.qmd</code> を直接テキストエディタで編集します。Markdownの基本的な書き方を覚えれば対応できます。</p>
+
+      <table>
+        <tr><th>書き方</th><th>表示結果</th></tr>
+        <tr><td><code>## 見出し</code></td><td>緑色の大見出し（h2）</td></tr>
+        <tr><td><code>### 小見出し</code></td><td>小見出し（h3）</td></tr>
+        <tr><td><code>**太字**</code></td><td><strong>太字</strong></td></tr>
+        <tr><td><code>- 箇条書き</code></td><td>・箇条書きリスト</td></tr>
+        <tr><td><code>[リンクテキスト](URL)</code></td><td>クリックできるリンク</td></tr>
+      </table>
+
+      <h3>ホームページの編集（index.qmd）</h3>
+      <p>ホームページには HTML が直接書かれています。以下の箇所だけ変更することが多いです。</p>
+
+      <table>
+        <tr><th>変更したい箇所</th><th>ファイル内での場所</th></tr>
+        <tr><td>ヒーローセクションの文章</td><td><code>&lt;p class="hero-description"&gt;</code> の中</td></tr>
+        <tr><td>研究トピックカードの内容</td><td><code>class="card h-100 p-3"</code> の各ブロック</td></tr>
+        <tr><td>ゼミ参加募集の文章</td><td>末尾の「ゼミへ参加希望の方へ」セクション</td></tr>
+      </table>
+
+      <h3>教員情報の更新</h3>
+      <p>赤石先生の氏名・職歴・リンクは <code>index.qmd</code> と <code>members.qmd</code> の両方に記載されています。変更の際は両方を更新してください。</p>
+
+      <div class="box box-warn">
+        <strong>⚠️ 顔写真の変更</strong>
+        顔写真は <code>photo.jpg</code> というファイル名で保存されています。変更する場合は同名で上書き保存するか、ファイル名を変えて <code>index.qmd</code>・<code>members.qmd</code> 両方の画像パスを書き換えてください。
+      </div>
+    </section>
+
+    <!-- ===== Section 11 ===== -->
+    <section class="section" id="sec11">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <span class="section-icon">🎨</span>
+        <h2 class="section-title">CSSデザインの解説（styles.css）</h2>
+      </div>
+
+      <p><code>styles.css</code> は、サイト全体の見た目を決めるファイルです。各セクションを解説します。</p>
+
+      <h3>カラーパレット（主な色）</h3>
+      <table>
+        <tr><th>色</th><th>CSSの値</th><th>使用箇所</th></tr>
+        <tr><td><span style="display:inline-block;width:16px;height:16px;background:#2c6e3f;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>濃いグリーン</td><td><code>#2c6e3f</code></td><td>h2見出し・下線・フッター背景</td></tr>
+        <tr><td><span style="display:inline-block;width:16px;height:16px;background:#3a9a5c;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>ミドルグリーン</td><td><code>#3a9a5c</code></td><td>ボタン（研究を見る）</td></tr>
+        <tr><td><span style="display:inline-block;width:16px;height:16px;background:#1a3a5c;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>ネイビー</td><td><code>#1a3a5c</code></td><td>フッター・メンバーアバター</td></tr>
+        <tr><td><span style="display:inline-block;width:16px;height:16px;background:#deb887;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>ベージュ</td><td><code>#deb887</code></td><td>ボタン（メンバー紹介）</td></tr>
+        <tr><td><span style="display:inline-block;width:16px;height:16px;background:#1a7abf;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>ブルー</td><td><code>#1a7abf</code></td><td>ナビリンクホバー・論文誌名</td></tr>
+      </table>
+
+      <h3>主なスタイル定義</h3>
+      <table class="css-table">
+        <tr><th>セレクタ</th><th>役割</th></tr>
+        <tr><td>.navbar</td><td>上部ナビゲーションバー。白背景・薄いボーダー</td></tr>
+        <tr><td>.hero</td><td>トップページの背景画像エリア。<code>hero2.jpg</code>を使用し、暗いオーバーレイを重ねている</td></tr>
+        <tr><td>.hero p</td><td>ヒーロー内テキストを白・1.4rem に強制</td></tr>
+        <tr><td>.card:hover</td><td>カードにマウスを当てると影が出て少し浮き上がる</td></tr>
+        <tr><td>.member-card</td><td>メンバー一覧の各カード（アバター・名前・役割）</td></tr>
+        <tr><td>.news-item</td><td>ニュース一覧の1行。日付・バッジ・内容が横並び</td></tr>
+        <tr><td>.badge-paper 等</td><td>ニュースのカテゴリバッジ。種別ごとに色が変わる</td></tr>
+        <tr><td>.pub-item</td><td>論文リストの1件。下線で区切られる</td></tr>
+        <tr><td>.nav-footer</td><td>フッター。濃いグリーン背景</td></tr>
+        <tr><td>h2</td><td>研究テーマなどの大見出し。緑色＋下線</td></tr>
+        <tr><td>.theme-nav</td><td>研究ページ上部のナビゲーションボタン群</td></tr>
+        <tr><td>.quarto-layout-cell img</td><td>ギャラリー画像。高さ200px固定・object-fit:cover</td></tr>
+      </table>
+
+      <h3>フォントの変更方法</h3>
+      <p>現在は「Zen Maru Gothic」（丸みのある日本語フォント）を使用しています。変更する場合は以下を編集します。</p>
+
+      <div class="code-label">styles.css — フォント設定</div>
+      <pre><code>/* ここのURLを変えると別のGoogleフォントを使える */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Zen Maru Gothic', serif;  /* ← フォント名をここに */
+}</code></pre>
+
+      <div class="box box-info">
+        <strong>💡 Google Fontsで日本語フォントを探す</strong>
+        <a href="https://fonts.google.com/?subset=japanese" target="_blank">https://fonts.google.com/?subset=japanese</a> でフィルター「Japanese」を選ぶと日本語対応フォントが一覧できます。
+      </div>
+    </section>
+
+    <!-- ===== Section 12 ===== -->
+    <section class="section" id="sec12">
+      <div class="section-header">
+        <span class="section-number">12</span>
+        <span class="section-icon">🗂️</span>
+        <h2 class="section-title">ナビゲーション・フッターの変更</h2>
+      </div>
+
+      <p>ナビゲーションバーとフッターは <code>_quarto.yml</code> で管理しています。</p>
+
+      <h3>現在の設定（_quarto.yml 抜粋）</h3>
+      <div class="code-label">_quarto.yml</div>
+      <pre><code>website:
+  title: "Akaishi Lab"
+  
+  navbar:
+    left:
+      - href: index.qmd
+        text: ホーム       # ← ここのtextがメニュー表示名
+      - href: research.qmd
+        text: 研究
+      # ...以下略
+    right:
+      - icon: github
+        href: https://github.com/DaisukeOSU
+      - icon: envelope
+        href: https://forms.gle/Ls7SbsprrEmax6Pi7   # お問い合わせフォーム</code></pre>
+
+      <h3>新しいページを追加する手順</h3>
+      <ol class="steps">
+        <li>新しい <code>新ページ名.qmd</code> ファイルをプロジェクトフォルダに作成</li>
+        <li><code>_quarto.yml</code> の <code>navbar: left:</code> に追加</li>
+        <li>フッターのHTMLにも追加（<code>page-footer: center:</code> の部分）</li>
+        <li><code>quarto render</code> でビルド</li>
+      </ol>
+
+      <div class="code-label">_quarto.yml — ナビへの追加例</div>
+      <pre><code>navbar:
+  left:
+    - href: index.qmd
+      text: ホーム
+    - href: access.qmd      # ← 追加
+      text: アクセス          # ← 追加</code></pre>
+    </section>
+
+    <!-- ===== Section 13 ===== -->
+    <section class="section" id="sec13">
+      <div class="section-header">
+        <span class="section-number">13</span>
+        <span class="section-icon">📅</span>
+        <h2 class="section-title">日常的な管理・運用</h2>
+      </div>
+
+      <h3>定期更新のスケジュール</h3>
+      <table>
+        <tr><th>タイミング</th><th>作業内容</th></tr>
+        <tr><td>論文採択・受賞時</td><td><code>news.csv</code> に追記 → researchmapのCSVを更新 → ビルド・公開</td></tr>
+        <tr><td>学会発表・イベント後</td><td><code>news.csv</code> に追記。写真があれば <code>gallery/</code> に追加してビルド</td></tr>
+        <tr><td>年度始め（4月）</td><td><code>members.csv</code> の学年更新・新入生追加 → <code>OB.csv</code> に卒業生追加</td></tr>
+        <tr><td>年度末（3月）</td><td>卒業生の <code>members.csv</code> からの削除・<code>OB.csv</code> への追加</td></tr>
+        <tr><td>不定期</td><td>研究テーマの成果更新（research.qmd）</td></tr>
+      </table>
+
+      <h3>Googleアナリティクスの確認</h3>
+      <p>サイトにはGoogleアナリティクス（<code>G-7RP9QNY80F</code>）が設定されています。アクセス状況は <a href="https://analytics.google.com/" target="_blank">https://analytics.google.com/</a> でログインして確認できます（Googleアカウントのアクセス権限が必要）。</p>
+
+      <h3>バックアップ</h3>
+      <div class="box box-danger">
+        <strong>🔴 重要：定期的なバックアップを推奨</strong>
+        GitHubへのpushがバックアップ代わりになりますが、CSVファイルや画像も含めて定期的にローカルにバックアップを取っておくことをお勧めします。特に <code>members.csv</code>・<code>news.csv</code>・<code>photos/</code> フォルダは重要です。
+      </div>
+    </section>
+
+    <!-- ===== Section 14 ===== -->
+    <section class="section" id="sec14">
+      <div class="section-header">
+        <span class="section-number">14</span>
+        <span class="section-icon">🔧</span>
+        <h2 class="section-title">トラブルシューティング</h2>
+      </div>
+
+      <h3>よくあるトラブルと対処法</h3>
+
+      <h4>① quarto render がエラーで止まる</h4>
+      <div class="box box-tip">
+        まずエラーメッセージをよく読み、どのファイルの何行目でエラーが出たかを確認します。多くの場合、RパッケージのインストールまたはCSVの書式ミスが原因です。
+      </div>
+
+      <h4>② 写真がギャラリーに表示されない</h4>
+      <table>
+        <tr><th>確認事項</th><th>対処</th></tr>
+        <tr><td>ファイルが <code>photos/年/月/</code> にあるか</td><td>手動でフォルダを確認</td></tr>
+        <tr><td>ファイル名に日本語や特殊文字がないか</td><td>英数字・アンダースコアのみに変更</td></tr>
+        <tr><td>Exifデータが正しいか</td><td>gallary.R 実行時のメッセージを確認</td></tr>
+      </table>
+
+      <h4>③ GitHubにpushできない</h4>
+      <div class="code-label">Terminal</div>
+      <pre><code># まず状況確認
+git status
+
+# 認証エラーの場合、GitHubの認証情報を再設定
+git config --global user.email "your-email@example.com"
+git config --global user.name "Your Name"
+
+# それでも解決しない場合
+# GitHubの「Settings → Developer settings → Personal access tokens」でトークンを発行</code></pre>
+
+      <h4>④ サイトの一部が更新されない</h4>
+      <p>ブラウザのキャッシュが原因のことがあります。<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>（強制リロード）で解決することが多いです。</p>
+
+      <h4>⑤ ニュースのバッジ色が「灰色」になる</h4>
+      <p><code>news.csv</code> の <code>type</code> 列の値が <code>論文</code>・<code>受賞</code>・<code>研究</code>・<code>募集</code>・<code>メディア</code> 以外になっているときです。スペルを確認してください。</p>
+    </section>
+
+    <!-- ===== Section 15 ===== -->
+    <section class="section" id="sec15">
+      <div class="section-header">
+        <span class="section-number">15</span>
+        <span class="section-icon">✅</span>
+        <h2 class="section-title">引き継ぎチェックリスト</h2>
+      </div>
+
+      <p>管理者が交代する際に確認・引き継ぐべき項目の一覧です。</p>
+
+      <h3>アカウント・権限</h3>
+      <table>
+        <tr><th>項目</th><th>引き継ぎ内容</th><th>確認</th></tr>
+        <tr><td>GitHubアカウント</td><td><code>DaisukeOSU</code> のアクセス権限（Collaborator追加）</td><td>☐</td></tr>
+        <tr><td>Googleアナリティクス</td><td>管理者に Googleアカウントを追加してもらう</td><td>☐</td></tr>
+        <tr><td>Googleフォーム</td><td>お問い合わせフォームの回答を確認できるGoogleアカウント</td><td>☐</td></tr>
+        <tr><td>researchmap</td><td>論文CSVエクスポートは赤石先生のアカウントが必要</td><td>☐</td></tr>
+      </table>
+
+      <h3>環境セットアップ</h3>
+      <table>
+        <tr><th>項目</th><th>確認内容</th><th>確認</th></tr>
+        <tr><td>R・RStudioのインストール</td><td>バージョンが要件を満たしているか</td><td>☐</td></tr>
+        <tr><td>必要パッケージ</td><td>tidyverse・knitr・exiftoolr・magick が使えるか</td><td>☐</td></tr>
+        <tr><td>Gitの設定</td><td>user.name・user.email が設定済みか</td><td>☐</td></tr>
+        <tr><td>リポジトリのクローン</td><td><code>git clone</code> でローカルに複製できているか</td><td>☐</td></tr>
+        <tr><td>quarto render の実行</td><td>エラーなくビルドできるか</td><td>☐</td></tr>
+      </table>
+
+      <h3>引き継ぎ時の確認事項</h3>
+      <table>
+        <tr><th>項目</th><th>確認内容</th><th>確認</th></tr>
+        <tr><td>news.csv の更新方法</td><td>バッジの種類と書式を理解しているか</td><td>☐</td></tr>
+        <tr><td>members.csv の更新</td><td>年度替わりの手順を把握しているか</td><td>☐</td></tr>
+        <tr><td>写真の追加方法</td><td>gallary.R の使い方を実際に試したか</td><td>☐</td></tr>
+        <tr><td>git push の手順</td><td>add → commit → push の流れを把握しているか</td><td>☐</td></tr>
+        <tr><td>このマニュアルの場所</td><td>マニュアルファイルをどこで参照するか知っているか</td><td>☐</td></tr>
+      </table>
+
+      <div class="box box-tip">
+        <strong>💡 新管理者への推奨事項</strong>
+        最初は <code>quarto preview</code> でプレビューを確認しながら <code>news.csv</code> を1件追加して公開するという小さな作業から始めることをお勧めします。それだけで基本的な更新フローが身につきます。
+      </div>
+
+      <h3>連絡先・サポート</h3>
+      <table>
+        <tr><th>困ったこと</th><th>相談先</th></tr>
+        <tr><td>サイトの内容・方針</td><td>赤石大輔 准教授</td></tr>
+        <tr><td>技術的なトラブル</td><td>赤石先生・または前任管理者</td></tr>
+        <tr><td>Quartoの使い方</td><td><a href="https://quarto.org/docs/guide/" target="_blank">Quarto公式ドキュメント（英語）</a></td></tr>
+        <tr><td>Rの使い方</td><td><a href="https://r4ds.had.co.nz/" target="_blank">R for Data Science（英語）</a> / 大学図書館のR入門書</td></tr>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p>🌿 赤石研究室ウェブサイト 運用マニュアル</p>
+  <p style="margin-top:0.4rem;">大阪産業大学 建築・環境デザイン学部 赤石研究室　© 2026</p>
+  <p style="margin-top:0.4rem; font-size:0.78rem; opacity:0.6;">このマニュアルはClaude（Anthropic）の支援のもと作成されました</p>
+</footer>
+
+<script>
+  // サイドバーのアクティブ状態更新
+  const sections = document.querySelectorAll('.section');
+  const links = document.querySelectorAll('.sidebar a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const id = entry.target.id;
+        const link = document.querySelector(`.sidebar a[href="#${id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
