@@ -582,3 +582,14 @@ a:hover { color: var(--accent); }
   }
 }
 
+.research-card-link {
+  text-decoration: none !important;
+  color: inherit;
+  display: block;
+}
+
+.research-card-link:hover .card {
+  background: var(--accent-pale, #f0f7f2);
+  transition: background 0.2s;
+}
+
