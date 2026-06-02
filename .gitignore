@@ -1,5 +1,0 @@
-# _site以外を全て除外
-*
-!_site/
-!_site/**
-!.gitignore
