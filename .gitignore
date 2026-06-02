@@ -1,18 +1,5 @@
-# RStudio
-*.Rproj
-.Rproj.user/
-
-# Quarto中間ファイル
-/.quarto/
-**/*.quarto_ipynb
-*_files/
-
-# ソースファイル
-*.qmd
-*.Rmd
-*.R
-*.bib
-*.scss
-
-# その他
-.DS_Store
+# _site以外を全て除外
+*
+!_site/
+!_site/**
+!.gitignore
