@@ -569,3 +569,10 @@ a:hover { color: var(--accent); }
   }
 }
 
+@media (max-width: 640px) {
+  .dept-break::before {
+    content: '\A';
+    white-space: pre;
+  }
+}
+
