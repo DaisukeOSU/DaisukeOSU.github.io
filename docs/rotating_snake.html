@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>回転蛇錯視</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f5f5f5;
+    font-family: sans-serif;
+  }
+  canvas {
+    display: block;
+    border-radius: 12px;
+  }
+  .note {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<canvas id="c" width="560" height="560"></canvas>
+<p class="note">動いていますか？止まっていますか？</p>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2;
+
+const numRings = 6;
+const numSegs = 28;
+const maxR = cx - 16;
+const minR = 48;
+const GRAY = '#9A9A9A';
+const SNAKE = ['#111111', '#2266CC', '#EEEEEE', '#DDCC00'];
+
+let angle = 0;
+let moving = true;
+let nextSwitch = Date.now() + rand(200, 800);
+
+function rand(a, b) {
+  return a + Math.random() * (b - a);
+}
+
+function scheduleNext() {
+  nextSwitch = Date.now() + rand(150, 850);
+}
+
+function ringR(i) {
+  return minR + (maxR - minR) * (i / numRings);
+}
+
+function draw() {
+  const now = Date.now();
+  if (now >= nextSwitch) {
+    moving = !moving;
+    scheduleNext();
+  }
+
+  ctx.clearRect(0, 0, W, H);
+
+  // 外周グレー背景
+  ctx.beginPath();
+  ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+  ctx.fillStyle = GRAY;
+  ctx.fill();
+
+  for (let r = 0; r < numRings; r++) {
+    const outerR = ringR(r + 1);
+    const innerR = ringR(r);
+    const dir = r % 2 === 0 ? 1 : -1;
+    const ringAngle = angle * dir;
+    const segAngle = (Math.PI * 2) / numSegs;
+
+    for (let s = 0; s < numSegs; s++) {
+      const a0 = ringAngle + s * segAngle;
+      const subDiv = 4;
+      for (let k = 0; k < subDiv; k++) {
+        const sa0 = a0 + (k / subDiv) * segAngle;
+        const sa1 = a0 + ((k + 1) / subDiv) * segAngle;
+        const colorIdx = (s * subDiv + k + Math.round(s * 0.5)) % 4;
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR - 1, sa0, sa1);
+        ctx.arc(cx, cy, innerR + 1, sa1, sa0, true);
+        ctx.closePath();
+        ctx.fillStyle = SNAKE[colorIdx];
+        ctx.fill();
+      }
+    }
+
+    // リング境界線（グレー）
+    ctx.beginPath();
+    ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+    ctx.strokeStyle = GRAY;
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+    ctx.strokeStyle = GRAY;
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  }
+
+  // 中央グレー円
+  ctx.beginPath();
+  ctx.arc(cx, cy, minR, 0, Math.PI * 2);
+  ctx.fillStyle = GRAY;
+  ctx.fill();
+
+  if (moving) angle += 0.0003;
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
